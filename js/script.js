@@ -6,10 +6,20 @@ wpmTag = document.querySelector(".wpm span"),
 cpmTag = document.querySelector(".cpm span"),
 tryAgainBtn = document.querySelector("button");
 
+
+let paragraphsArray;
+if (typeof module !== 'undefined' && typeof require !== 'undefined') {
+    paragraphsArray = require("./paragraph").paragraphs;
+} else {
+    paragraphsArray = window.paragraphs;
+}
+
+
 let timer,maxTime = 60, timeLeft = maxTime,
 charIndex = mistakes = isTyping = 0;
 
 function randomParagraph() {
+     if (!typingText) return;
      let randIndex = Math.floor(Math.random() * paragraphs.length);
      typingText.innerHTML = "";
      paragraphs[randIndex].split("").forEach(span => {
@@ -87,5 +97,30 @@ function randomParagraph() {
  }
 
 randomParagraph();
-inpField.addEventListener("input", initTyping);
-tryAgainBtn.addEventListener("click", resetGame);
+if (inpField) {
+  inpField.addEventListener("input", initTyping);
+}
+if (tryAgainBtn) {
+  tryAgainBtn.addEventListener("click", resetGame);
+}
+
+function calculateWPM(charIndex, mistakes, maxTime, timeLeft) {
+  let timePassed = maxTime - timeLeft;
+  if (timePassed <= 0) return 0;
+  let wpm = Math.round(((charIndex - mistakes) / 5) / (timePassed / 60));
+  return wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
+}
+
+function calculateCPM(charIndex, mistakes) {
+  let cpm = charIndex - mistakes;
+  return cpm < 0 ? 0 : cpm;
+}
+
+function updateMistakes(isCorrect, currentMistakes) {
+  return isCorrect ? currentMistakes : currentMistakes + 1;
+}
+
+
+if (typeof module !== 'undefined') {
+  module.exports = { calculateWPM, calculateCPM, updateMistakes };
+}
