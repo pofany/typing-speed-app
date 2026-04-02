@@ -4,9 +4,8 @@
 # Logs
 *.log
 
-<<<<<<< HEAD
 .DS_Store
-=======
+
 # Playwright
 node_modules/
 /test-results/
@@ -14,4 +13,10 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
->>>>>>> 4c0f3f2 (Added unit and e2e tests for code)
+
+#Environment variables
+.env
+
+# Build output
+dist/
+node_modules/

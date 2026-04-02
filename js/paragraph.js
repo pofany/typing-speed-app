@@ -8,4 +8,6 @@ const paragraphs = [
     "AI applications include advanced web search engines (e.g., Google), recommendation systems (used by YouTube, Amazon and Netflix), understanding human speech (such as Siri and Alexa), self-driving cars (e.g., Waymo), automated decision-making and competing at the highest level in strategic game systems (such as chess and Go). As machines become increasingly capable, tasks considered to require intelligence are often removed from the definition of AI, a phenomenon known as the AI effect. "
 ];
 
-module.exports = { paragraphs };
+// module.exports = { paragraphs };
+
+export { paragraphs };

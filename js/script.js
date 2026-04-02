@@ -1,22 +1,34 @@
+import { paragraphs } from './paragraph.js';
 const typingText = document.querySelector(".typing-text p"),
 inpField = document.querySelector(".wrapper .input-field"),
 timeTag =  document.querySelector(".time span b"),
-mistakeTag = document.querySelector(".mistakes span");
+mistakeTag = document.querySelector(".mistakes span"),
 wpmTag = document.querySelector(".wpm span"),
 cpmTag = document.querySelector(".cpm span"),
 tryAgainBtn = document.querySelector("button");
 
+const appStatus = import.meta.env.VITE_APP_STATUS || "local";
+const statusElement = document.querySelector("#env-status");
 
-let paragraphsArray;
-if (typeof module !== 'undefined' && typeof require !== 'undefined') {
-    paragraphsArray = require("./paragraph").paragraphs;
-} else {
-    paragraphsArray = window.paragraphs;
+if (appStatus) {
+  statusElement.innerText = `Mode: ${appStatus}`;
+  statusElement.style.color = appStatus === "Development" ? "orange" : "green";
 }
 
+// let paragraphsArray;
+// if (typeof module !== 'undefined' && typeof require !== 'undefined') {
+//     paragraphsArray = require("./paragraph").paragraphs;
+// } else {
+//     paragraphsArray = window.paragraphs;
+// }
 
-let timer,maxTime = 60, timeLeft = maxTime,
-charIndex = mistakes = isTyping = 0;
+let timer;
+let maxTime = 60;
+let timeLeft = maxTime;
+
+let charIndex = 0;
+let mistakes = 0;
+let isTyping = false;
 
 function randomParagraph() {
      if (!typingText) return;
@@ -104,23 +116,3 @@ if (tryAgainBtn) {
   tryAgainBtn.addEventListener("click", resetGame);
 }
 
-function calculateWPM(charIndex, mistakes, maxTime, timeLeft) {
-  let timePassed = maxTime - timeLeft;
-  if (timePassed <= 0) return 0;
-  let wpm = Math.round(((charIndex - mistakes) / 5) / (timePassed / 60));
-  return wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
-}
-
-function calculateCPM(charIndex, mistakes) {
-  let cpm = charIndex - mistakes;
-  return cpm < 0 ? 0 : cpm;
-}
-
-function updateMistakes(isCorrect, currentMistakes) {
-  return isCorrect ? currentMistakes : currentMistakes + 1;
-}
-
-
-if (typeof module !== 'undefined') {
-  module.exports = { calculateWPM, calculateCPM, updateMistakes };
-}

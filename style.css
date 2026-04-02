@@ -17,11 +17,11 @@ body{
 }
 
 .wrapper{
-    width: 770px;
+    width: 870px;
     padding: 35px;
-    margin-left: 100px;
+    margin-left: 200px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .wrapper .input-field{
