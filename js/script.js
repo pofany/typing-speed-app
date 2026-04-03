@@ -7,13 +7,22 @@ wpmTag = document.querySelector(".wpm span"),
 cpmTag = document.querySelector(".cpm span"),
 tryAgainBtn = document.querySelector("button");
 
-const appStatus = import.meta.env.VITE_APP_STATUS || "local";
-const statusElement = document.querySelector("#env-status");
+import posthog from 'posthog-js';
 
-if (appStatus) {
-  statusElement.innerText = `Mode: ${appStatus}`;
-  statusElement.style.color = appStatus === "Development" ? "orange" : "green";
-}
+posthog.init('phc_BhcKkSq9sLgM3DdFarnwMUGB4cn3dNp8LBzSLAkUxX6x', {
+    api_host: 'https://us.i.posthog.com',
+    person_profiles: 'identified_only', // або 'always' для анонімних користувачів
+    capture_pageview: true,
+    persistence: 'localStorage',
+});
+
+// const appStatus = import.meta.env.VITE_APP_STATUS || "local";
+// const statusElement = document.querySelector("#env-status");
+
+// if (appStatus) {
+//   statusElement.innerText = `Mode: ${appStatus}`;
+//   statusElement.style.color = appStatus === "Development" ? "orange" : "green";
+// }
 
 // let paragraphsArray;
 // if (typeof module !== 'undefined' && typeof require !== 'undefined') {
