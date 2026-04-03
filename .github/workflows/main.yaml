@@ -19,6 +19,8 @@ jobs:
     
       - name: Install dependencies
         run: npm ci --omit=optional
+        env:
+           VITE_APP_STATUS: production
 
       - name: Run linter
         run: npm run lint
