@@ -16,7 +16,19 @@ posthog.init('phc_BhcKkSq9sLgM3DdFarnwMUGB4cn3dNp8LBzSLAkUxX6x', {
     persistence: 'localStorage',
 });
 
-// const appStatus = import.meta.env.VITE_APP_STATUS || "local";
+// posthog.onFeatureFlags(() => {
+//   // Перевіряємо, чи увімкнено прапорець 'show-urgent-filter' у кабінеті PostHog
+//   if (posthog.isFeatureEnabled('show-urgent-filter')) {
+//       const btn = document.getElementById('urgent-btn');
+//       if (btn) {
+//           btn.style.display = 'block'; // Показуємо кнопку, якщо прапорець активний
+//           console.log('Feature flag active: Showing urgent button');
+//       }
+//   } else {
+//       console.log('Feature flag inactive');
+//   }
+// });
+// // const appStatus = import.meta.env.VITE_APP_STATUS || "local";
 // const statusElement = document.querySelector("#env-status");
 
 // if (appStatus) {
@@ -115,6 +127,12 @@ function randomParagraph() {
   mistakeTag.innerText = mistakes;
   wpmTag.innerText = 0;
   cpmTag.innerText = 0;
+
+  posthog.capture('task_created', {
+    priority: 'high',
+    category: 'typing_test',
+    is_authenticated: false // якщо у тебе немає логіна
+});
  }
 
 randomParagraph();
