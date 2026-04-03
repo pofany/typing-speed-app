@@ -18,7 +18,7 @@ jobs:
           node-version: '20'
     
       - name: Install dependencies
-        run: npm install --no-optional
+        run: npm ci --omit=optional
 
       - name: Run linter
         run: npm run lint
