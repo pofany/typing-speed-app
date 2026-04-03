@@ -7,13 +7,13 @@ wpmTag = document.querySelector(".wpm span"),
 cpmTag = document.querySelector(".cpm span"),
 tryAgainBtn = document.querySelector("button");
 
-const appStatus = import.meta.env.VITE_APP_STATUS || "local";
-const statusElement = document.querySelector("#env-status");
+// const appStatus = import.meta.env.VITE_APP_STATUS || "local";
+// const statusElement = document.querySelector("#env-status");
 
-if (appStatus) {
-  statusElement.innerText = `Mode: ${appStatus}`;
-  statusElement.style.color = appStatus === "Development" ? "orange" : "green";
-}
+// if (appStatus) {
+//   statusElement.innerText = `Mode: ${appStatus}`;
+//   statusElement.style.color = appStatus === "Development" ? "orange" : "green";
+// }
 
 // let paragraphsArray;
 // if (typeof module !== 'undefined' && typeof require !== 'undefined') {
