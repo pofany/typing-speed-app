@@ -1,3 +1,4 @@
+[![GitHub Actions CI/CD](https://github.com/pofany/typing-speed-app/actions/workflows/main.yaml/badge.svg)](https://github.com/pofany/typing-speed-app/actions/workflows/main.yaml)
 Here is a little typing app, written on HTML/CSS/JavaScript.
 
 You can check how it works locally by running next command:
