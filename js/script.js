@@ -16,6 +16,33 @@ posthog.init('phc_BhcKkSq9sLgM3DdFarnwMUGB4cn3dNp8LBzSLAkUxX6x', {
     persistence: 'localStorage',
 });
 
+import * as Sentry from "@sentry/browser";
+Sentry.init({
+  dsn: "https://24b83f829f2d8406e206239bdc6e8b0b@o4511161083035648.ingest.de.sentry.io/4511161086115920",
+  
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.replayIntegration(), // Додає запис сесій 
+  ],
+  environment: "development",
+  tracePropagationTargets: ["localhost", /^https:\/\/your-app\.github\.io/], 
+  tracesSampleRate: 1.0,
+  // Налаштування реплеїв (запису екрану)
+  replaysSessionSampleRate: 0.1, // 10% звичайних сесій
+  replaysOnErrorSampleRate: 1.0, // 100% сесій, де сталася помилка
+
+  sendDefaultPii: true,
+});
+
+Sentry.setUser({
+  id: "12345",
+  email: "student@example.com",
+  segment: "premium_user" // Приклад кастомного тегу для сегментації
+  });
+
+// myUndefinedFunction();
+// myUndefinedFunction2();
+
 // posthog.onFeatureFlags(() => {
 //   // Перевіряємо, чи увімкнено прапорець 'show-urgent-filter' у кабінеті PostHog
 //   if (posthog.isFeatureEnabled('show-urgent-filter')) {
